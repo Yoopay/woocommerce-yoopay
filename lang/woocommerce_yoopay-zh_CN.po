@@ -1,0 +1,267 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Yoopay\n"
+"POT-Creation-Date: 2016-02-01 11:56+0800\n"
+"PO-Revision-Date: 2016-02-01 18:01+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: woocommerce-yoopay.php:54
+msgid "Settings"
+msgstr "设置"
+
+#: WC_Gateway_Yoopay.php:80 WC_Gateway_Yoopay.php:83 WC_Gateway_Yoopay.php:165
+msgid "Yoopay"
+msgstr "友付"
+
+#: WC_Gateway_Yoopay.php:81
+msgid "Yoopay Payment Gateway Plug-in for WooCommerce."
+msgstr "友付的WooCommerce支付网关"
+
+#: WC_Gateway_Yoopay.php:82
+#, php-format
+msgid "Default Notification Url: %s"
+msgstr "默认通知网址： %s"
+
+#: WC_Gateway_Yoopay.php:139
+msgid "Online Banking (China Union Pay)"
+msgstr "网上银行（中国银联）"
+
+#: WC_Gateway_Yoopay.php:140
+msgid "Alipay"
+msgstr "支付宝"
+
+#: WC_Gateway_Yoopay.php:141
+msgid "China Bank Transfer"
+msgstr "中国银行转账"
+
+#: WC_Gateway_Yoopay.php:142
+msgid "Oversea Bank Transfer"
+msgstr "海外银行转账"
+
+#: WC_Gateway_Yoopay.php:143
+msgid "Oversea Credit Card"
+msgstr "海外信用卡"
+
+#: WC_Gateway_Yoopay.php:144
+msgid "Paypal"
+msgstr "贝宝"
+
+#: WC_Gateway_Yoopay.php:145
+msgid "WeChat Pay"
+msgstr "微信支付"
+
+#: WC_Gateway_Yoopay.php:149
+msgid "Expect a failed response"
+msgstr "期待一个失败响应"
+
+#: WC_Gateway_Yoopay.php:150
+msgid "Expect a pending response"
+msgstr "期待一个未决响应"
+
+#: WC_Gateway_Yoopay.php:151
+msgid "Expect a successful response"
+msgstr "期待一个成功响应"
+
+#: WC_Gateway_Yoopay.php:156
+msgid "Enable / Disable"
+msgstr "启用／禁用"
+
+#: WC_Gateway_Yoopay.php:157
+msgid "Enable this payment gateway"
+msgstr "启用这个支付网关"
+
+#: WC_Gateway_Yoopay.php:162
+msgid "Title"
+msgstr "名称"
+
+#: WC_Gateway_Yoopay.php:164
+msgid "Payment title the customer will see during the checkout process."
+msgstr "客户将在支付过程中看到支付名称"
+
+#: WC_Gateway_Yoopay.php:168
+msgid "Description"
+msgstr "说明"
+
+#: WC_Gateway_Yoopay.php:170
+msgid "Payment description the customer will see during the checkout process."
+msgstr "客户将在支付过程中看到支付说明"
+
+#: WC_Gateway_Yoopay.php:171
+msgid "Pay securely using yoopay."
+msgstr "使用友付安全支付"
+
+#: WC_Gateway_Yoopay.php:175
+msgid "Item Name"
+msgstr "产品名称"
+
+#: WC_Gateway_Yoopay.php:177
+msgid ""
+"Item Name the customer will see in the yoopay payment window.\n"
+"Available variables:\n"
+" - {{site_name}}\n"
+" - {{date}}"
+msgstr ""
+"客户将在友付的支付窗口看到产品名称。\n"
+"可用变量:\n"
+" - {{site_name}}\n"
+" - {{date}}"
+
+#: WC_Gateway_Yoopay.php:178
+msgid "Purchase from {{site_name}} on {{date}}"
+msgstr "从{{site_name}}于{{date}}支付"
+
+#: WC_Gateway_Yoopay.php:181
+msgid "Item Body"
+msgstr "产品正文"
+
+#: WC_Gateway_Yoopay.php:183
+msgid ""
+"Item Body the customer will see in the yoopay payment window.\n"
+"Available variables:\n"
+" - {{items_in_cart}}"
+msgstr "客户将在友付支付窗口看到产品正文"
+
+#: WC_Gateway_Yoopay.php:184
+msgid ""
+"Item Bought:\n"
+" {{items_in_cart}}"
+msgstr ""
+"已购买产品:\n"
+" {{items_in_cart}}"
+
+#: WC_Gateway_Yoopay.php:188
+msgid "Yoopay Merchant API key"
+msgstr "友付商家API密钥"
+
+#: WC_Gateway_Yoopay.php:193
+msgid "Yoopay login email"
+msgstr "友付登陆邮箱"
+
+#: WC_Gateway_Yoopay.php:198
+msgid "Enabled payment methods"
+msgstr "启用付款方式"
+
+#: WC_Gateway_Yoopay.php:203
+msgid "Specify the payment methods should be displayed on the payment page."
+msgstr "指定的付款方式应该显示在支付页面"
+
+#: WC_Gateway_Yoopay.php:207
+msgid "Payment methods"
+msgstr "支付方式"
+
+#: WC_Gateway_Yoopay.php:211
+msgid "Invoice on Yoopay"
+msgstr "友付的发票"
+
+#: WC_Gateway_Yoopay.php:212
+msgid ""
+"Indicate whether to show the invoice collection form on the payment page."
+msgstr "请指示是否在支付页面显示发票收集表格"
+
+#: WC_Gateway_Yoopay.php:214 WC_Gateway_Yoopay.php:228
+msgid "Place the payment gateway in sandbox mode."
+msgstr "把支付网关置入沙盒模式"
+
+#: WC_Gateway_Yoopay.php:218 WC_Gateway_Yoopay.php:219
+msgid "Auto submit form"
+msgstr "自动提交表格"
+
+#: WC_Gateway_Yoopay.php:221
+msgid ""
+"If checked the form in the receipt page will be authomatically submitted."
+msgstr "被审核过的表格在收据页面将被自动提交"
+
+#: WC_Gateway_Yoopay.php:225
+msgid "Yoopay Sandbox Mode"
+msgstr "友付的沙盒模式"
+
+#: WC_Gateway_Yoopay.php:226
+msgid "Enable Sandbox Mode"
+msgstr "启用沙盒模式"
+
+#: WC_Gateway_Yoopay.php:232
+msgid "Sandbox target status"
+msgstr "沙盒目标状态"
+
+#: WC_Gateway_Yoopay.php:235
+msgid "Select the sandbox target status."
+msgstr "选择沙盒目标状态"
+
+#: WC_Gateway_Yoopay.php:239
+msgid "Yoopay Debug Mode"
+msgstr "友付调试模式"
+
+#: WC_Gateway_Yoopay.php:240
+msgid "Enable Debug Mode"
+msgstr "启用调试模式"
+
+#: WC_Gateway_Yoopay.php:242
+msgid "Place the payment gateway in debug mode. Will log to woocommerce/logs/."
+msgstr "把支付网关置入调试模式。讲记录到 woocommerce/logs/."
+
+#: WC_Gateway_Yoopay.php:263
+msgid ""
+"An error occured while processing the order, if the problem persist please "
+"contact us."
+msgstr "在处理订单时报错，如果问题持续出现请联系我们。"
+
+#: WC_Gateway_Yoopay.php:293
+msgid "d/m/Y"
+msgstr "日／月／年"
+
+#: WC_Gateway_Yoopay.php:352
+msgid "You will be redirected to Yoopay shortly."
+msgstr "你很快将会被定向到友付"
+
+#: WC_Gateway_Yoopay.php:354
+msgid "Pay with Yoopay"
+msgstr "用友付支付"
+
+#: WC_Gateway_Yoopay.php:355
+msgid "Cancel"
+msgstr "取消"
+
+#: WC_Gateway_Yoopay.php:377
+#, php-format
+msgid "User has correctly returned from Yoopay website. Yoopay id: %s"
+msgstr "用户已经正确地从友付网站返回。友付账号：%s"
+
+#: WC_Gateway_Yoopay.php:381 WC_Gateway_Yoopay.php:427
+#, php-format
+msgid "Payment failed for order number %s, yoopay id: %s"
+msgstr "订单号%s支付失败，友付账号：%s"
+
+#: WC_Gateway_Yoopay.php:386 WC_Gateway_Yoopay.php:436
+#, php-format
+msgid "Sign error for order number %s, yoopay id: %s"
+msgstr "订单号%s登陆错误，友付账号：%s"
+
+#: WC_Gateway_Yoopay.php:412
+#, php-format
+msgid "Order has successfully been paid. Yoopay id: %s"
+msgstr "订单已经支付成功。友付账号：%s"
+
+#: WC_Gateway_Yoopay.php:415
+msgid "Invoice Information"
+msgstr "发票信息"
+
+#: WC_Gateway_Yoopay.php:423
+#, php-format
+msgid "Order number %s is pending, yoopay id: %s"
+msgstr "订单号%s等待中， 友付账号：%s"
+
+#: WC_Gateway_Yoopay.php:431
+#, php-format
+msgid "Yoopay payment completed using: %s"
+msgstr "使用友付支付成功：%s"
