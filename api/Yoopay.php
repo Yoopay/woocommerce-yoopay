@@ -46,8 +46,8 @@ class Yoopay
 
     private static $KEYS_ORDER_CHARGE = array( 'tid', 'item_price', 'item_currency', 'notify_url', 'sandbox', 'invoice' );
     private static $KEYS_ORDER_CHARGE_RESPONSE = array( 'yapi_tid', 'tid', 'item_price', 'item_currency', 'result_status', 'type', 'sandbox' ); 
-    private static $ATTRS_REQUIRED_ORDER_CHARGE = array( 'language' => 'Language' , 'type' => 'Required', 'tid' => 'Required', 'item_name' => 'Required', 'item_body' => 'Required', 'item_price' => 'Required', 'item_currency' => 'Currency', 'payment_method' => 'PaymentMethod', 'customer_name' => 'Required', 'customer_email' => 'Required', 'invoice' => 'Required' );
-    private static $ATTRS_OPTIONAL_ORDER_CHARGE = array( 'customer_mobile', 'sandbox', 'sandbox_target_status', 'notify_url', 'return_url', 'retry_count' );
+    private static $ATTRS_REQUIRED_ORDER_CHARGE = array( 'language' => 'Language' , 'type' => 'Required', 'tid' => 'Required', 'item_name' => 'Required', 'item_body' => 'Required', 'item_price' => 'Required', 'item_currency' => 'Currency', 'payment_method' => 'PaymentMethod', 'customer_name' => 'Required', 'customer_email' => 'Required', 'invoice' => 'Required', 'sandbox' => 'Required' );
+    private static $ATTRS_OPTIONAL_ORDER_CHARGE = array( 'customer_mobile', 'sandbox_target_status', 'notify_url', 'return_url', 'retry_count' );
     private static $ATTRS_INVOICE = array( 'inovice_title', 'invoice_recipient', 'invoice_phone', 'invoice_mailing_address', 'invoice_city', 'invoice_postal_code' );
 
     /**

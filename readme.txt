@@ -79,11 +79,17 @@ This plugin is a FREE download, for the costs of the gateway usage please contac
 
 == Changelog ==
 
+= 1.1 =
+* Changed the "sandbox" field to required in the api.
+
 = 1.0 =
 * First Release.
 * Integration with yoopay payment api version 11.
 
 == Upgrade Notice ==
+
+= 1.1 =
+* Changed the "sandbox" field to required in the api.
 
 = 1.0 =
 * First release of the plugin, compatible with yoopay payment api version 11.
