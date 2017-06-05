@@ -84,6 +84,11 @@ class WC_Gateway_Yoopay extends WC_Payment_Gateway {
      */
     protected $_logger;
 
+    /**
+     * @var array
+     */  
+    public $supports = array( 'products', 'refunds' );
+
     public function __construct() {
 
         $this->id = self::GATEWAY_ID;
@@ -105,9 +110,10 @@ class WC_Gateway_Yoopay extends WC_Payment_Gateway {
         $this->sandbox = (int) ("yes" === $this->sandbox);
         $this->auto_submit_form = (bool) ("yes" === $this->auto_submit_form);
 
+        $additional = array();
 
         $this->_logger = new Logger( self::GATEWAY_ID, $this->debug );
-        $this->_api = new Yoopay( $this->api_key, $this->seller_email );
+        $this->_api = new Yoopay( $this->api_key, $this->seller_email, $additional );
 
         if ( is_admin() ) {
             add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -221,7 +227,6 @@ class WC_Gateway_Yoopay extends WC_Payment_Gateway {
                 'title'     => __( 'Invoice on Yoopay', self::TRANSLATION_ID ),
                 'label'     => __( 'Indicate whether to show the invoice collection form on the payment page.', self::TRANSLATION_ID ),
                 'type'      => 'checkbox',
-                'description' => __( 'Place the payment gateway in sandbox mode.', self::TRANSLATION_ID ),
                 'default'   => 'no',
             ),
             'auto_submit_form' => array(
@@ -332,7 +337,7 @@ class WC_Gateway_Yoopay extends WC_Payment_Gateway {
         $attrs = array(
             // Required fields
             'language'              => $this->get_language(),
-            'type'                  => 'CHARGE',
+            'type'                  => Yoopay::REQUEST_CHARGE,
             'tid'                   => $order_id,
             'item_name'             => $this->get_item_name(),
             'item_body'             => $this->get_item_body( $order ),
@@ -403,12 +408,12 @@ class WC_Gateway_Yoopay extends WC_Payment_Gateway {
     }
 
     /**
-     * Called when the gateway sends the notification to the server
+     * Processes a charge notification
+     *
+     * @param array $request
+     * @return void
      */
-    public function check_notification() {
-        $request = wp_unslash( $_REQUEST );
-        $this->_logger->debug(json_encode($request));
-
+    protected function _process_charge_notification($request) {
         try {
             $order = wc_get_order( $request['tid'] );
 
@@ -456,6 +461,55 @@ class WC_Gateway_Yoopay extends WC_Payment_Gateway {
     }
 
     /**
+     * Processes a charge notification
+     *
+     * @param array $request
+     * @return void
+     */
+    protected function _process_refund_notification($request) {
+        try {
+            $order = wc_get_order( $request['tid'] );
+
+            if( $this->_api->validateRefundResponse($request) && Yoopay::isSuccessRefund($result_array) ) {
+                $order->add_order_note(sprintf( __( 'Order has successfully been refunded. Yoopay refund id: %s', self::TRANSLATION_ID ), Yoopay::getRefundTid($request) ) );
+            } else {
+                $order->add_order_note(sprintf( __( 'Sign error for refund number %s, yoopay id: %s', self::TRANSLATION_ID ), $order->id, Yoopay::getRefundTid($request) ) );
+                $this->_logger->error(json_encode($request));
+            }
+
+            die( 'SUCCESS' );
+        } catch(Exception $e) {
+            $this->_logger->error($e->getMessage());
+            $this->_logger->debug($e->getTraceAsString());
+            wp_die( 'Notification validation error', 'Woocommerce Yoopay', array( 'response' => 500 ) );
+        }
+    }
+
+    /**
+     * Called when the gateway sends the notification to the server
+     */
+    public function check_notification() {
+        $request = wp_unslash( $_REQUEST );
+        $this->_logger->debug(json_encode($request));
+
+        if(!isset($request['type'])) {
+            $this->_logger->error('The "type" field is not present:' . json_encode($request));
+            wp_die('ERROR', array('response' => 500));
+        }
+
+        switch($request['type']) {
+            case Yoopay::REQUEST_CHARGE :
+                $this->_process_charge_notification($request);
+                break;
+            case Yoopay::REQUEST_REFUND :
+                $this->_process_refund_notification($request);
+                break;
+            default:
+                wp_die('ERROR', array('response' => 500));
+        }
+    }
+
+    /**
      * @param int $order_id
      * @return array
      */
@@ -467,6 +521,57 @@ class WC_Gateway_Yoopay extends WC_Payment_Gateway {
             'redirect'  => $order->get_checkout_payment_url( true )
         );
 
+    }
+
+    /**
+     * Process refund.
+     *
+     * If the gateway declares 'refunds' support, this will allow it to refund.
+     * a passed in amount.
+     *
+     * @param  int $order_id
+     * @param  float $amount
+     * @param  string $reason
+     * @return bool|WP_Error True or false based on success, or a WP_Error object.
+     */
+    public function process_refund( $order_id, $amount = null, $reason = '' ) {
+        $order = wc_get_order( $order_id );
+
+        $is_full = (int) ($order->get_total() == $amount);
+
+        $attrs = array(
+            // Required fields
+            'type'                  => Yoopay::REQUEST_REFUND,
+            'tid'                   => $order_id,
+            'yapi_tid'              => $order->get_transaction_id(), 
+            'full_refund'           => $is_full,
+            // Optional fields
+            'sandbox'               => $this->sandbox,
+            'sandbox_target_status' => $this->sandbox_target_status,
+            'notify_url'            => $this->get_notification_url(),
+            'refund_amount'         => $amount
+        );
+
+        $fields = $this->_api->getRefundReqestFields($attrs);
+        $this->_logger->debug(json_encode($fields));
+
+        try {
+            $result = $this->_api->postCurl($fields, $this->_api->getRefundAction()); 
+            $result_array = is_array($result) ? $result : json_decode($result, true);
+
+            $this->_logger->debug(json_encode($result_array));
+            if( $this->_api->validateRefundResponse($result_array) && Yoopay::isSuccessRefund($result_array) ) {
+                $order->add_order_note(sprintf( __( 'Yoopay refund (%s %s) completed, Yoopay refund id: %s', self::TRANSLATION_ID ), Yoopay::getRefundAmount($result_array), Yoopay::getRefundCurrency($result_array), Yoopay::getRefundTid($result_array) ) );
+                return true;
+            } else {
+                $this->_logger->error(json_encode($result_array));
+            }
+        } catch(Exception $e) {
+            $this->_logger->error($e->getMessage());
+            $this->_logger->debug($e->getTraceAsString());
+        }
+
+        return false;
     }
 
     /**

@@ -39,16 +39,31 @@
  */
 class Yoopay
 {
-    const CHARGE_ACTION = 'https://yoopay.cn/yapi';
+    const API_ADDRESS = 'https://yoopay.cn/yapi';
+
+    const REQUEST_CHARGE = 'CHARGE';
+    const REQUEST_REFUND = 'REFUND';
 
     public static $ALLOWED_LANGUAGES = array( 'en', 'zh' );
     public static $ALLOWED_CURRENCIES = array( 'USD', 'CNY' );
 
     private static $KEYS_ORDER_CHARGE = array( 'tid', 'item_price', 'item_currency', 'notify_url', 'sandbox', 'invoice' );
+    private static $KEYS_ORDER_REFUND = array( 'tid', 'yapi_tid', 'refund_amount', 'full_refund', 'notify_url', 'sandbox' );
+
     private static $KEYS_ORDER_CHARGE_RESPONSE = array( 'yapi_tid', 'tid', 'item_price', 'item_currency', 'result_status', 'type', 'sandbox' ); 
+    private static $KEYS_ORDER_REFUND_RESPONSE = array( 'tid', 'refund_yapi_tid', 'refund_amount', 'refund_currency', 'refund_customer_email', 'refund_status', 'type', 'sandbox' );
+
     private static $ATTRS_REQUIRED_ORDER_CHARGE = array( 'language' => 'Language' , 'type' => 'Required', 'tid' => 'Required', 'item_name' => 'Required', 'item_body' => 'Required', 'item_price' => 'Required', 'item_currency' => 'Currency', 'payment_method' => 'PaymentMethod', 'customer_name' => 'Required', 'customer_email' => 'Required', 'invoice' => 'Required', 'sandbox' => 'Required' );
     private static $ATTRS_OPTIONAL_ORDER_CHARGE = array( 'customer_mobile', 'sandbox_target_status', 'notify_url', 'return_url', 'retry_count' );
+
+    private static $ATTRS_REQUIRED_ORDER_REFUND = array( 'type' => 'Required', 'yapi_tid' => 'Required', 'tid' => 'Required', 'full_refund' => 'Required' );
+    private static $ATTRS_OPTIONAL_ORDER_REFUND = array( 'sandbox', 'sandbox_target_status', 'refund_amount', 'notify_url' );
+
     private static $ATTRS_INVOICE = array( 'inovice_title', 'invoice_recipient', 'invoice_phone', 'invoice_mailing_address', 'invoice_city', 'invoice_postal_code' );
+
+    private static $DEFAULT_CONFIG = array( 
+        'curl_timeout' => 60
+    );
 
     /**
      * @var string
@@ -59,13 +74,30 @@ class Yoopay
      */
     protected $_seller_email;
 
+    /**
+     * @var array
+     */
+    protected $_config;
+
 
     /**
      * @param string $api_key
+     * @param string $seller_email
+     * @param array $additional
      */
-    public function __construct($api_key, $seller_email) {
+    public function __construct($api_key, $seller_email, $additional = array()) {
         $this->_api_key = $api_key;
         $this->_seller_email = $seller_email;
+
+        if(count($additional)) {
+            $valid = array_keys(self::$DEFAULT_CONFIG);
+            $this->_config = self::$DEFAULT_CONFIG;
+            foreach($additional as $key => $value) {
+                if(in_array($key, $valid)) {
+                    $this->_config[$key] = $value;
+                }
+            }
+        }
     }
 
     /**
@@ -101,7 +133,14 @@ class Yoopay
      * @return string
      */
     public function getChargeAction() {
-        return self::CHARGE_ACTION;
+        return self::API_ADDRESS;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefundAction() {
+        return self::API_ADDRESS;
     }
 
     /**
@@ -121,6 +160,29 @@ class Yoopay
      */
     public function getChargeRequestSign($attrs) {
         $values = $this->_getOrderedValues(self::$KEYS_ORDER_CHARGE, $attrs);
+        array_unshift($values, $this->_api_key, $this->_seller_email);
+        return $this->_getSign($values);
+    }
+
+    /**
+     * Generates the Refund sign
+     *
+     * Requires an array with: 
+     * 
+     * app_key 
+     * seller_email
+     * tid
+     * yapi_tid
+     * refund_amount 
+     * full_refund
+     * notify_url
+     * sandbox
+     *
+     * @param array $attrs
+     * @return string
+     */
+    public function getRefundRequestSign($attrs) {
+        $values = $this->_getOrderedValues(self::$KEYS_ORDER_REFUND, $attrs);
         array_unshift($values, $this->_api_key, $this->_seller_email);
         return $this->_getSign($values);
     }
@@ -196,17 +258,64 @@ class Yoopay
     }
 
     /**
+     * Returns an associative array containing all the fields that need to be submitted to the api
+     *
+     * @param array $attrs
+     * @return array
+     */
+    public function getRefundReqestFields($attrs) {
+        $return = array();
+        $return['seller_email'] = $this->_seller_email;
+        $return['sign'] = $this->getRefundRequestSign($attrs);
+        foreach( self::$ATTRS_REQUIRED_ORDER_REFUND as $required => $validation ) {
+            $this->{"_validate$validation"}($attrs, $required);
+            $return[$required] = $attrs[$required];
+        }
+        foreach( self::$ATTRS_OPTIONAL_ORDER_REFUND as $optional ) {
+            if( isset( $attrs[$optional] ) && "" != $attrs[$optional] ) {
+                $return[$optional] = $attrs[$optional];
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * @param array $parameters
      * @param array $request
      * @return bool
      * @throws UnexpectedValueException
      */
-    public function validateChargeResponse( $request ) {
-        $values = $this->_getOrderedValues(self::$KEYS_ORDER_CHARGE_RESPONSE, $request);
+    protected function _validateResponseSign( $parameters, $request ) {
+        $values = $this->_getOrderedValues($parameters, $request);
         array_unshift($values, $this->_api_key);
         if( !isset($request['sign']) || $request['sign'] !== $this->_getSign($values) ) {
             throw new UnexpectedValueException('Sign does not match');
         }
         return true;
+    }
+
+    /**
+     * @param array $request
+     * @return bool
+     */
+    public function validateChargeResponse( $request ) {
+        return $this->_validateResponseSign( self::$KEYS_ORDER_CHARGE_RESPONSE, $request );
+    }
+
+    /**
+     * @param array $request
+     * @return bool
+     */
+    public function validateRefundResponse( $request ) {
+        return $this->_validateResponseSign( self::$KEYS_ORDER_REFUND_RESPONSE, $request );
+    }
+
+    /**
+     * @param array $request
+     * @return bool
+     */
+    static function isSuccessRefund( $request ) {
+        return ( (int) $request['refund_status'] ) === 1;
     }
 
     /**
@@ -237,6 +346,30 @@ class Yoopay
      * @param array $request
      * @return string 
      */
+    static function getRefundTid( $request ) {
+        return $request['refund_yapi_tid'];
+    }
+
+    /**
+     * @param array $request
+     * @return string 
+     */
+    static function getRefundAmount( $request ) {
+        return $request['refund_amount'];
+    }
+
+    /**
+     * @param array $request
+     * @return string 
+     */
+    static function getRefundCurrency( $request ) {
+        return $request['refund_currency'];
+    }
+
+    /**
+     * @param array $request
+     * @return string 
+     */
     static function getPaymentMethod( $request ) {
         return $result['result_desc'];
     }
@@ -258,5 +391,36 @@ class Yoopay
             return $return;
         }
         return false;
+    }
+
+    /**
+     * Fires a curl request and returns the data contained in the response
+     *
+     * @param mixed $body
+     * @param string $url
+     * @return string
+     * @throws Exception
+     */
+    public function postCurl($body, $url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->_config['curl_timeout']);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));   
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
+
+        $data = curl_exec($ch);
+
+        if (empty($data)) //TODO: check
+        {
+            $error = curl_errno($ch);
+            throw new Exception($error);
+        }
+
+        curl_close($ch);
+        return $data;
     }
 }

@@ -3,7 +3,7 @@
  * Plugin Name: Yoopay - WooCommerce Gateway
  * Plugin URI: https://it-consultis.com/
  * Description: Extends WooCommerce by Adding the Yoopay.cn Gateway.
- * Version: 1.0
+ * Version: 2.0
  * Author: IT Consultis
  * Author URI: http://it-consultis.com/
  * Requires at least: 4.1
@@ -69,5 +69,5 @@ function woocommerce_yoopay_action_links( $links ) {
 add_action('plugins_loaded', 'woocommerce_yoopay_load_textdomain');
 
 function woocommerce_yoopay_load_textdomain() {
-	load_plugin_textdomain( 'woocommerce_yoopay', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' );
+    load_plugin_textdomain( 'woocommerce_yoopay', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' );
 }

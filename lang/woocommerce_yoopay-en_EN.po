@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Yoopay\n"
-"POT-Creation-Date: 2016-02-01 11:56+0800\n"
-"PO-Revision-Date: 2016-02-01 11:57+0800\n"
+"POT-Creation-Date: 2016-06-29 18:06+0800\n"
+"PO-Revision-Date: 2016-06-29 18:06+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_EN\n"
@@ -15,96 +15,96 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: woocommerce-yoopay.php:54
+#: woocommerce-yoopay.php:64
 msgid "Settings"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:80 WC_Gateway_Yoopay.php:83 WC_Gateway_Yoopay.php:165
+#: WC_Gateway_Yoopay.php:95 WC_Gateway_Yoopay.php:98 WC_Gateway_Yoopay.php:181
 msgid "Yoopay"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:81
+#: WC_Gateway_Yoopay.php:96
 msgid "Yoopay Payment Gateway Plug-in for WooCommerce."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:82
+#: WC_Gateway_Yoopay.php:97
 #, php-format
 msgid "Default Notification Url: %s"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:139
+#: WC_Gateway_Yoopay.php:155
 msgid "Online Banking (China Union Pay)"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:140
+#: WC_Gateway_Yoopay.php:156
 msgid "Alipay"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:141
+#: WC_Gateway_Yoopay.php:157
 msgid "China Bank Transfer"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:142
+#: WC_Gateway_Yoopay.php:158
 msgid "Oversea Bank Transfer"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:143
+#: WC_Gateway_Yoopay.php:159
 msgid "Oversea Credit Card"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:144
+#: WC_Gateway_Yoopay.php:160
 msgid "Paypal"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:145
+#: WC_Gateway_Yoopay.php:161
 msgid "WeChat Pay"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:149
+#: WC_Gateway_Yoopay.php:165
 msgid "Expect a failed response"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:150
+#: WC_Gateway_Yoopay.php:166
 msgid "Expect a pending response"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:151
+#: WC_Gateway_Yoopay.php:167
 msgid "Expect a successful response"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:156
+#: WC_Gateway_Yoopay.php:172
 msgid "Enable / Disable"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:157
+#: WC_Gateway_Yoopay.php:173
 msgid "Enable this payment gateway"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:162
+#: WC_Gateway_Yoopay.php:178
 msgid "Title"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:164
+#: WC_Gateway_Yoopay.php:180
 msgid "Payment title the customer will see during the checkout process."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:168
+#: WC_Gateway_Yoopay.php:184
 msgid "Description"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:170
+#: WC_Gateway_Yoopay.php:186
 msgid "Payment description the customer will see during the checkout process."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:171
+#: WC_Gateway_Yoopay.php:187
 msgid "Pay securely using yoopay."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:175
+#: WC_Gateway_Yoopay.php:191
 msgid "Item Name"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:177
+#: WC_Gateway_Yoopay.php:193
 msgid ""
 "Item Name the customer will see in the yoopay payment window.\n"
 "Available variables:\n"
@@ -112,149 +112,164 @@ msgid ""
 " - {{date}}"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:178
+#: WC_Gateway_Yoopay.php:194
 msgid "Purchase from {{site_name}} on {{date}}"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:181
+#: WC_Gateway_Yoopay.php:197
 msgid "Item Body"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:183
+#: WC_Gateway_Yoopay.php:199
 msgid ""
 "Item Body the customer will see in the yoopay payment window.\n"
 "Available variables:\n"
 " - {{items_in_cart}}"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:184
+#: WC_Gateway_Yoopay.php:200
 msgid ""
 "Item Bought:\n"
 " {{items_in_cart}}"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:188
+#: WC_Gateway_Yoopay.php:204
 msgid "Yoopay Merchant API key"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:193
+#: WC_Gateway_Yoopay.php:209
 msgid "Yoopay login email"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:198
+#: WC_Gateway_Yoopay.php:214
 msgid "Enabled payment methods"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:203
+#: WC_Gateway_Yoopay.php:219
 msgid "Specify the payment methods should be displayed on the payment page."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:207
+#: WC_Gateway_Yoopay.php:223
 msgid "Payment methods"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:211
+#: WC_Gateway_Yoopay.php:227
 msgid "Invoice on Yoopay"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:212
+#: WC_Gateway_Yoopay.php:228
 msgid ""
 "Indicate whether to show the invoice collection form on the payment page."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:214 WC_Gateway_Yoopay.php:228
+#: WC_Gateway_Yoopay.php:230 WC_Gateway_Yoopay.php:244
 msgid "Place the payment gateway in sandbox mode."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:218 WC_Gateway_Yoopay.php:219
+#: WC_Gateway_Yoopay.php:234 WC_Gateway_Yoopay.php:235
 msgid "Auto submit form"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:221
+#: WC_Gateway_Yoopay.php:237
 msgid ""
 "If checked the form in the receipt page will be authomatically submitted."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:225
+#: WC_Gateway_Yoopay.php:241
 msgid "Yoopay Sandbox Mode"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:226
+#: WC_Gateway_Yoopay.php:242
 msgid "Enable Sandbox Mode"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:232
+#: WC_Gateway_Yoopay.php:248
 msgid "Sandbox target status"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:235
+#: WC_Gateway_Yoopay.php:251
 msgid "Select the sandbox target status."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:239
+#: WC_Gateway_Yoopay.php:255
 msgid "Yoopay Debug Mode"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:240
+#: WC_Gateway_Yoopay.php:256
 msgid "Enable Debug Mode"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:242
+#: WC_Gateway_Yoopay.php:258
 msgid "Place the payment gateway in debug mode. Will log to woocommerce/logs/."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:263
+#: WC_Gateway_Yoopay.php:279
 msgid ""
 "An error occured while processing the order, if the problem persist please "
 "contact us."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:293
+#: WC_Gateway_Yoopay.php:309
 msgid "d/m/Y"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:352
+#: WC_Gateway_Yoopay.php:368
 msgid "You will be redirected to Yoopay shortly."
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:354
+#: WC_Gateway_Yoopay.php:370
 msgid "Pay with Yoopay"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:355
+#: WC_Gateway_Yoopay.php:371
 msgid "Cancel"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:377
+#: WC_Gateway_Yoopay.php:393
 #, php-format
 msgid "User has correctly returned from Yoopay website. Yoopay id: %s"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:381 WC_Gateway_Yoopay.php:427
+#: WC_Gateway_Yoopay.php:397 WC_Gateway_Yoopay.php:443
 #, php-format
 msgid "Payment failed for order number %s, yoopay id: %s"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:386 WC_Gateway_Yoopay.php:436
+#: WC_Gateway_Yoopay.php:402 WC_Gateway_Yoopay.php:452
 #, php-format
 msgid "Sign error for order number %s, yoopay id: %s"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:412
+#: WC_Gateway_Yoopay.php:428
 #, php-format
 msgid "Order has successfully been paid. Yoopay id: %s"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:415
+#: WC_Gateway_Yoopay.php:431
 msgid "Invoice Information"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:423
+#: WC_Gateway_Yoopay.php:439
 #, php-format
 msgid "Order number %s is pending, yoopay id: %s"
 msgstr ""
 
-#: WC_Gateway_Yoopay.php:431
+#: WC_Gateway_Yoopay.php:447
 #, php-format
 msgid "Yoopay payment completed using: %s"
+msgstr ""
+
+#: WC_Gateway_Yoopay.php:475
+#, php-format
+msgid "Order has successfully been refunded. Yoopay refund id: %s"
+msgstr ""
+
+#: WC_Gateway_Yoopay.php:477
+#, php-format
+msgid "Sign error for refund number %s, yoopay id: %s"
+msgstr ""
+
+#: WC_Gateway_Yoopay.php:565
+#, php-format
+msgid "Yoopay refund (%s %s) completed, Yoopay refund id: %s"
 msgstr ""

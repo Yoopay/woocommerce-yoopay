@@ -79,6 +79,9 @@ This plugin is a FREE download, for the costs of the gateway usage please contac
 
 == Changelog ==
 
+= 2.0 =
+* Added refund support.
+
 = 1.1 =
 * Changed the "sandbox" field to required in the api.
 
@@ -87,6 +90,9 @@ This plugin is a FREE download, for the costs of the gateway usage please contac
 * Integration with yoopay payment api version 11.
 
 == Upgrade Notice ==
+
+= 2.0 =
+* Added refund support.
 
 = 1.1 =
 * Changed the "sandbox" field to required in the api.
