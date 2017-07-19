@@ -7,7 +7,7 @@ Stable tag: 4.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Woocommerce gateway plugin based on the Yoopay (http://yoopay.cn/) payment gateway api version 11.
+Woocommerce 2.x gateway plugin based on the Yoopay (http://yoopay.cn/) payment gateway api version 11.
 
 == Description ==
 
